@@ -1,0 +1,7 @@
+streamlit
+crewai
+streamlit
+crewai[tools]
+google-generativeai
+agentops
+

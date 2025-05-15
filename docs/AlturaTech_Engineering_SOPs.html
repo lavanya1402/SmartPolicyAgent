@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlturaTech Engineering SOPs</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; }
+    h1, h2 { color: #2a2a2a; }
+    h1 { text-align: center; }
+    section { margin-bottom: 2rem; }
+    code { background: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+    .sensitive { color: #c0392b; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1>AlturaTech Solutions Pvt. Ltd.<br>Engineering SOP – Internal Use Only</h1>
+
+  <section>
+    <h2>1. Code Repository & Naming Conventions</h2>
+    <p>All repositories follow the format: <code>team-product-purpose</code>. Examples:</p>
+    <ul>
+      <li><code>core-api-authentication</code></li>
+      <li><code>frontend-client-dashboard</code></li>
+    </ul>
+    <p>Repo creation is handled by Engineering Ops. All new services must be registered in <code>AlturaInfraRegistry</code>.</p>
+  </section>
+
+  <section>
+    <h2>2. CI/CD Strategy</h2>
+    <p>All code pushes must go through the Altura CI pipeline:</p>
+    <ol>
+      <li>Pre-commit hooks via <code>altura-linter</code></li>
+      <li>PR-level build & test (Jenkins + GitHub Actions hybrid)</li>
+      <li>Staging deployment via <code>altura-deployctl</code></li>
+      <li>Prod deployments require <span class="sensitive">dual approval</span> from Tech Lead & Security</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>3. Infrastructure & Environments</h2>
+    <p>We use a 3-tier architecture (Dev → Staging → Prod) with locked down roles:</p>
+    <ul>
+      <li><strong>Dev:</strong> Auto-deploy every push</li>
+      <li><strong>Staging:</strong> Scheduled via <code>altura-deployctl --env staging</code></li>
+      <li><strong>Production:</strong> Requires signed artifact from <code>ReleaseGate</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Monitoring & On-Call Rotation</h2>
+    <p>All production services must be registered with <code>AlturaWatch</code> for uptime and latency tracking.</p>
+    <p>On-call assignments rotate weekly. All alerts routed through PagerDuty → Slack → <code>altura-alerts@</code>.</p>
+  </section>
+
+  <section>
+    <h2>5. API Standards & Performance Metrics</h2>
+    <p>All APIs must follow these guidelines:</p>
+    <ul>
+      <li>Use RESTful naming with snake_case only</li>
+      <li>Average response time < 300ms</li>
+      <li>Error rates < 0.5% weekly average</li>
+    </ul>
+    <p>API quality scores are tracked in <code>ApiHealthBoard</code> and reviewed during sprint retros.</p>
+  </section>
+
+  <section>
+    <h2>6. Secure Coding & Pre-Deploy Checklist</h2>
+    <p>Security reviews are mandatory. Checklist includes:</p>
+    <ul>
+      <li>No hardcoded secrets</li>
+      <li>Use <code>altura-vault</code> for secret management</li>
+      <li>Pass <code>altura-secscan</code> with score ≥ 95%</li>
+    </ul>
+    <p>Final review by InfoSec is done in <code>SecureSignPanel</code>.</p>
+  </section>
+
+  <section>
+    <h2>7. Legacy Systems & Refactor Policy</h2>
+    <p>Legacy services must be tagged in Git as <code>legacy_YYYYMM</code>.</p>
+    <p>Refactor requests need a <code>RefactorIntentForm</code> and can’t exceed 10% of team sprint capacity without PM approval.</p>
+  </section>
+
+  <footer>
+    <p style="font-size: 0.9rem; color: gray;">Document version: 1.3 | Last updated: March 2025 | Confidential</p>
+  </footer>
+
+</body>
+</html>
